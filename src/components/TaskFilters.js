@@ -4,26 +4,41 @@ import React from 'react';
  * TASK FILTERS COMPONENT
  * 
  * YOUR TASK:
- * 1. Create a search input that updates 'filters.search'.
- * 2. Create a dropdown for Status: All, To Do, In Progress, Done.
- * 3. Create a dropdown for Priority: All, High, Medium, Low.
- * 4. Use the 'filters' and 'setFilters' props to manage state.
- * 5. Use 'filters-section', 'search-input', 'filter-select' classes.
+ * 1. Implement controlled inputs for Status, Priority, and Search.
+ * 2. Update the parent state when filters change.
  */
 
-const TaskFilters = ({ filters, setFilters }) => {
-    const handleFilterChange = (key, value) => {
-        setFilters(prev => ({ ...prev, [key]: value }));
-    };
+const TaskFilters = () => {
+    // TODO: Implementation needed
 
     return (
-        <div className="filters-section">
-            {/* Implement Search Input */}
-
-            {/* Implement Status Dropdown */}
-
-            {/* Implement Priority Dropdown */}
-        </div>
+        <section className="section">
+            <h3 className="section-title">Filters</h3>
+            <div className="filter-grid">
+                <div>
+                    <label className="form-label">Status</label>
+                    <select className="form-select">
+                        <option value="all">All</option>
+                        <option value="to-do">To Do</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div>
+                    <label className="form-label">Priority</label>
+                    <select className="form-select">
+                        <option value="all">All</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div className="search-input-wrapper">
+                    <label className="form-label">Search</label>
+                    <input type="text" class="form-input" placeholder="Search tasks..." />
+                </div>
+            </div>
+        </section>
     );
 };
 

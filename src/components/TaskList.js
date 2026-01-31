@@ -4,35 +4,35 @@ import React from 'react';
  * TASK LIST COMPONENT
  * 
  * YOUR TASK:
- * 1. Map through the 'tasks' prop and render a card for each task.
- * 2. Display: Title, Description, Priority (with appropriate badge class), and Status.
- * 3. Add buttons/controls to change status: 'To Do', 'In Progress', 'Done'.
- * 4. Use 'onUpdateStatus' prop to update a task's status.
- * 5. Handle empty state: Show a message if no tasks match the current filters.
- * 6. Use 'tasks-grid', 'task-card', 'priority-badge' classes.
- * 7. For priority colors, use: 'priority-high', 'priority-medium', 'priority-low' based on the task priority value.
+ * 1. Map through the tasks and render task cards.
+ * 2. Apply correct badge classes based on status and priority.
+ * 3. Handle button clicks to update mission status.
  */
 
-const TaskList = ({ tasks, onUpdateStatus, onDelete }) => {
-    if (tasks.length === 0) {
-        return <div className="no-tasks">No tasks found. Try adjusting your filters or create a new one!</div>;
-    }
+const TaskList = ({ tasks, onUpdateStatus }) => {
+    // TODO: Implementation needed
 
     return (
-        <div className="tasks-grid">
-            {tasks.map(task => (
-                <div key={task.id} className="task-card fade-in">
-                    {/* Implement Task Card Details here */}
-
-                    <div className="task-title">{task.title}</div>
-
-                    {/* Status Controls */}
-                    <div className="task-footer">
-                        {/* Buttons to call onUpdateStatus(task.id, 'New Status') */}
+        <section className="section">
+            <h3 className="section-title">Tasks ({tasks.length})</h3>
+            <div className="task-list">
+                {/* EXAMPLE TASK CARD (HARDCODED FOR UI REFERENCE) */}
+                <div className="task-card">
+                    <h4 className="task-title">Complete React Challenge</h4>
+                    <p className="task-description">Build a task management dashboard with React components</p>
+                    <div className="task-meta">
+                        <span className="badge priority-high">HIGH</span>
+                        <span className="badge status-progress">IN PROGRESS</span>
+                    </div>
+                    <div className="task-actions">
+                        <button className="btn-sm btn-warning">Move to Done</button>
+                        <button className="btn-sm btn-danger">Move to To Do</button>
                     </div>
                 </div>
-            ))}
-        </div>
+
+                {/* Candidate should map actual task list here */}
+            </div>
+        </section>
     );
 };
 

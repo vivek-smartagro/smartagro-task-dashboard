@@ -6,95 +6,75 @@ import TaskFilters from './components/TaskFilters';
 import TaskStats from './components/TaskStats';
 
 function App() {
-    // State for tasks
-    const [tasks, setTasks] = useState(() => {
-        const saved = localStorage.getItem('smartagro-tasks');
-        return saved ? JSON.parse(saved) : [];
-    });
+    // STATE MANAGEMENT - Mock data for the candidate to work with
+    const [tasks, setTasks] = useState([
+        {
+            id: 1,
+            title: 'Complete React Challenge',
+            description: 'Build a task management dashboard with React components including forms, lists, and filters',
+            priority: 'High',
+            status: 'In Progress'
+        },
+        {
+            id: 2,
+            title: 'Setup Development Environment',
+            description: 'Install Node.js, VS Code, and create React application',
+            priority: 'Medium',
+            status: 'Done'
+        },
+        {
+            id: 3,
+            title: 'Review Documentation',
+            description: 'Read React hooks documentation and best practices guide',
+            priority: 'Low',
+            status: 'To Do'
+        }
+    ]);
 
-    // State for filters
-    const [filters, setFilters] = useState({
-        status: 'All',
-        priority: 'All',
-        search: ''
-    });
-
-    // Persist tasks to localStorage
-    useEffect(() => {
-        localStorage.setItem('smartagro-tasks', JSON.stringify(tasks));
-    }, [tasks]);
-
-    // Helper: Add new task
+    // INSTRUCTION: The candidate should implement these functions
     const addTask = (newTask) => {
-        const task = {
-            ...newTask,
-            id: Date.now(),
-            status: 'To Do',
-            createdAt: new Date().toISOString()
-        };
-        setTasks([task, ...tasks]);
+        console.log('Task to add:', newTask);
+        // TODO: Implement task addition logic
     };
 
-    // Helper: Update task status
     const updateTaskStatus = (taskId, newStatus) => {
-        setTasks(tasks.map(task =>
-            task.id === taskId ? { ...task, status: newStatus } : task
-        ));
+        console.log('Update task:', taskId, 'to', newStatus);
+        // TODO: Implement status update logic
     };
-
-    // Helper: Delete task
-    const deleteTask = (taskId) => {
-        setTasks(tasks.filter(task => task.id !== taskId));
-    };
-
-    // Logical filtering
-    const filteredTasks = tasks.filter(task => {
-        const statusMatch = filters.status === 'All' || task.status === filters.status;
-        const priorityMatch = filters.priority === 'All' || task.priority === filters.priority;
-        const searchMatch = task.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-            task.description.toLowerCase().includes(filters.search.toLowerCase());
-
-        return statusMatch && priorityMatch && searchMatch;
-    });
 
     return (
-        <div className="container fade-in">
-            <header>
-                <div className="logo">SmartAgro Task Dashboard</div>
-                <div className="current-date">{new Date().toLocaleDateString('en-GB', { dateStyle: 'long' })}</div>
-            </header>
+        <div className="mockup-container">
+            <h1 className="mockup-title">📱 UI MOCKUP REFERENCE - Task Dashboard</h1>
 
-            {/* 
-        INSTRUCTION: Statistics Dashboard
-        Implementation needed in TaskStats.js 
-      */}
+            <div className="instruction-box">
+                <strong>For Candidates:</strong> This mockup shows what your final Task Dashboard should look like.
+                Focus on building the React components to match this structure. Professional styling is already provided in App.css!
+            </div>
+
+            {/* Statistics Section - Data needs to be calculated dynamically */}
             <TaskStats tasks={tasks} />
 
-            {/* 
-        INSTRUCTION: Task Creation Form
-        Implementation needed in TaskForm.js 
-      */}
-            <TaskForm onAdd={addTask} />
+            <main className="main-content">
+                <aside className="sidebar">
+                    {/* Creation Form */}
+                    <TaskForm onAdd={addTask} />
 
-            <div className="main-content">
-                <div className="section-header">
-                    <h2>Your Tasks</h2>
-                    {/* 
-            INSTRUCTION: Filtering Controls
-            Implementation needed in TaskFilters.js 
-          */}
-                    <TaskFilters filters={filters} setFilters={setFilters} />
-                </div>
+                    {/* Filters */}
+                    <TaskFilters />
+                </aside>
 
-                {/* 
-          INSTRUCTION: Task Display
-          Implementation needed in TaskList.js 
-        */}
-                <TaskList
-                    tasks={filteredTasks}
-                    onUpdateStatus={updateTaskStatus}
-                    onDelete={deleteTask}
-                />
+                {/* Task List - Data should be filtered before passing */}
+                <TaskList tasks={tasks} onUpdateStatus={updateTaskStatus} />
+            </main>
+
+            <div className="wireframe-note">
+                <strong>💡 Implementation Notes:</strong>
+                <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+                    <li>Use the provided CSS classes in App.css for consistent styling</li>
+                    <li>Build each section as a separate React component</li>
+                    <li>Connect forms and buttons to update state properly</li>
+                    <li>Focus on functionality - styling is already provided!</li>
+                </ul>
             </div>
         </div>
     );

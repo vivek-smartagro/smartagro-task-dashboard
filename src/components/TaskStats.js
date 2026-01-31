@@ -4,37 +4,31 @@ import React from 'react';
  * TASK STATISTICS COMPONENT
  * 
  * YOUR TASK:
- * 1. Calculate and display counts for: Total Tasks, To Do, In Progress, Done.
+ * 1. Calculate counts for: To Do, In Progress, Done.
  * 2. Calculate completion percentage: (Done / Total) * 100.
- * 3. Display a progress bar reflecting the completion percentage.
- * 4. Ensure statistics update in real-time as tasks change.
- * 5. Use 'stats-grid', 'stat-card', 'progress-container', 'progress-bar' classes.
- * 6. Use appropriate headings (h4) and values (p) inside each stat-card.
+ * 3. Update the width of the .progress-fill div and the percentage text.
  */
 
 const TaskStats = ({ tasks }) => {
-    // Logic to calculate stats
-    const total = tasks.length;
-    const done = 0; // Calculate this
-    const progress = total > 0 ? (done / total) * 100 : 0;
+    // TODO: Implementation needed
+    const todo = 5;
+    const inProgress = 3;
+    const done = 8;
+    const progress = 60; // Example static value from mockup
 
     return (
-        <div className="stats-dashboard">
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <h4>Total Tasks</h4>
-                    <p>{total}</p>
+        <header className="header-section">
+            <h1 className="header-title">SmartAgro Task Dashboard</h1>
+            <div className="stats-row">
+                <div className="stat-box">To Do: {todo}</div>
+                <div className="stat-box">In Progress: {inProgress}</div>
+                <div className="stat-box">Done: {done}</div>
+                <div className="progress-bar">
+                    <div className="progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
-                {/* Add more stat cards for Statuses */}
+                <div>{progress}% Complete</div>
             </div>
-
-            <div className="progress-section">
-                <label>Overall Progress: {Math.round(progress)}%</label>
-                <div className="progress-container">
-                    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-                </div>
-            </div>
-        </div>
+        </header>
     );
 };
 
