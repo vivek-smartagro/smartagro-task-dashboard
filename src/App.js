@@ -4,9 +4,9 @@ import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import TaskFilters from './components/TaskFilters';
 import TaskStats from './components/TaskStats';
+import { CloudCog } from 'lucide-react';
 
 function App() {
-    // STATE MANAGEMENT - Mock data for the candidate to work with
     const [tasks, setTasks] = useState([
         {
             id: 1,
@@ -30,17 +30,21 @@ function App() {
             status: 'To Do'
         }
     ]);
+    
+  
 
     // INSTRUCTION: The candidate should implement these functions
     const addTask = (newTask) => {
         console.log('Task to add:', newTask);
         // TODO: Implement task addition logic
+        setTasks((prev)=> [...prev , newTask])
     };
 
     const updateTaskStatus = (taskId, newStatus) => {
         console.log('Update task:', taskId, 'to', newStatus);
-        // TODO: Implement status update logic
+        setTasks((prev)=> prev.map((item)=>item.id== taskId ? {...item,status:newStatus}:item))
     };
+    console.log(tasks)
 
     return (
         <div className="mockup-container">
@@ -60,7 +64,7 @@ function App() {
                     <TaskForm onAdd={addTask} />
 
                     {/* Filters */}
-                    <TaskFilters />
+                    <TaskFilters tasks={tasks} setTasks={setTasks} />
                 </aside>
 
                 {/* Task List - Data should be filtered before passing */}

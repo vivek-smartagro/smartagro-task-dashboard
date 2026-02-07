@@ -15,6 +15,8 @@ const TaskStats = ({ tasks }) => {
     const inProgress = 3;
     const done = 8;
     const progress = 60; // Example static value from mockup
+    // const todo = tasks.length;
+   
 
     return (
         <header className="header-section">

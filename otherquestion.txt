@@ -1,0 +1,45 @@
+interface userDAta{
+    name:String;
+    phone:Number;
+    email:String
+}
+
+5 === "5"
+
+const myObject = {
+    name: "prince",
+    email: "price@gmail.com"
+}
+
+myObject.email = ""
+const user :userDAta ={
+    name:"prince",
+    phone :123,
+    email:"abc@gamil.com"
+}
+
+
+ let p = new Promise((res,rej)=>{
+    let suc = true;
+    if(suc){
+        res("fullfilled")
+    }
+    else{
+        rej("failed")
+    }
+ })
+
+ p.then((data)=>{
+    console.log(data)
+ })
+
+
+ user.findMany({email:"prince@gmail.com"},{us1})
+
+ findMany
+ find
+ user.findOne({email:'abc@gmail.com'},{_id:1})
+ user.findMany({email:"abc@amgil.com"},{_id:1})
+ user.update({email:"abc@gmail.com" },{email:"rcc@gamil.com"})
+ user.delete({user:"prnce"},{_id:1})
+ user.deleteMany({})

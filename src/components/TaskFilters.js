@@ -1,4 +1,6 @@
-import React from 'react';
+import { CloudCog } from 'lucide-react';
+import React, { useState } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 /**
  * TASK FILTERS COMPONENT
@@ -8,8 +10,35 @@ import React from 'react';
  * 2. Update the parent state when filters change.
  */
 
-const TaskFilters = () => {
+const TaskFilters = ({ tasks, setTasks }) => {
     // TODO: Implementation needed
+    const [input, setInput] = useState("")
+    const [status, setStaus] = useState("all")
+    const [priority, setPriority] = useState("all")
+
+    // tasks.filter((item)=> item.status == status)
+    // tasks.filter((item)=> item.priority == priority)
+
+    console.log(input)
+    const filterData = tasks && tasks.filter((item)=> item.title.toLowerCase().includes(input.toLowerCase()))
+    console.log(filterData)
+    // const filterData = tasks && tasks.filter((item)=>item.title.toLowerCase().includes(input.toLowerCase()))
+
+
+
+    // console.log(typeof (setTasks))
+    // React.useMemo(() => {
+    //     //  || p.status == status
+    //     //  || p.priority == priority)
+    //     setTasks(filterData)
+    // }, [input, priority, status])
+    // setTasks((prev)=> [...prev,filterData])
+    React.useMemo(()=>{
+        setTasks((prev)=> [...prev, filterData])
+    },[input])
+    
+
+
 
     return (
         <section className="section">
@@ -17,7 +46,7 @@ const TaskFilters = () => {
             <div className="filter-grid">
                 <div>
                     <label className="form-label">Status</label>
-                    <select className="form-select">
+                    <select className="form-select" value={status} onChange={(e) => setStaus(e.target.value)}>
                         <option value="all">All</option>
                         <option value="to-do">To Do</option>
                         <option value="in-progress">In Progress</option>
@@ -26,7 +55,7 @@ const TaskFilters = () => {
                 </div>
                 <div>
                     <label className="form-label">Priority</label>
-                    <select className="form-select">
+                    <select className="form-select" value={priority} onChange={(e) => setPriority(e.target.value)}>
                         <option value="all">All</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
@@ -35,7 +64,7 @@ const TaskFilters = () => {
                 </div>
                 <div className="search-input-wrapper">
                     <label className="form-label">Search</label>
-                    <input type="text" class="form-input" placeholder="Search tasks..." />
+                    <input type="text" class="form-input" placeholder="Search tasks..." value={input} onChange={(e) => setInput(e.target.value)} />
                 </div>
             </div>
         </section>

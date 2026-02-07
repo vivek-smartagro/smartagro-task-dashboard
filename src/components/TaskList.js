@@ -31,6 +31,24 @@ const TaskList = ({ tasks, onUpdateStatus }) => {
                 </div>
 
                 {/* Candidate should map actual task list here */}
+                {
+                    tasks && tasks.map((item) => (
+                       <section className="task-list" key={item.id} className="section">
+                         <div>
+                            <h4 className="task-title">{item.title}</h4>
+                            <p className="task-description">{item.desc}</p>
+                            <div className="task-meta">
+                                <span className="badge priority-high">{item.priority}</span>
+                                <span className="badge status-progress">{item.status}</span>
+                            </div>
+                            <div className="task-actions">
+                                <button className="btn-sm btn-warning">Move to {item.status}</button>
+                                <button className="btn-sm btn-danger">Move to To Do</button>
+                            </div>
+                        </div>
+                        </section>
+                    ))
+                }
             </div>
         </section>
     );
