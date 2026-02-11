@@ -31,16 +31,36 @@ function App() {
         }
     ]);
 
+    const [filters, setFilters] = useState({
+        status: 'all',
+        priority: 'all',
+        search: ''
+    });
+
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
+
     // INSTRUCTION: The candidate should implement these functions
     const addTask = (newTask) => {
         console.log('Task to add:', newTask);
         // TODO: Implement task addition logic
+        setTasks(prevTasks => [...prevTasks, { ...newTask, id: prevTasks.length + 1 }]);
     };
 
     const updateTaskStatus = (taskId, newStatus) => {
         console.log('Update task:', taskId, 'to', newStatus);
         // TODO: Implement status update logic
+        setTasks(prevTasks => prevTasks.map(task => task.id === taskId ? { ...task, status: newStatus } : task));
     };
+
+    const filteredTasks = tasks.filter(task => {
+        console.log(filters.status, filters.priority, filters.search);
+        if (filters.status !== 'all' && task.status.toLowerCase().replace(' ', '-') !== filters.status) return false;
+        if (filters.priority !== 'all' && task.priority.toLowerCase() !== filters.priority) return false;
+        if (filters.search && !task.title.toLowerCase().includes(filters.search.toLowerCase())) return false;
+        return true;
+    });
 
     return (
         <div className="mockup-container">
@@ -60,11 +80,11 @@ function App() {
                     <TaskForm onAdd={addTask} />
 
                     {/* Filters */}
-                    <TaskFilters />
+                    <TaskFilters onFilterChange={handleFilterChange} />
                 </aside>
 
                 {/* Task List - Data should be filtered before passing */}
-                <TaskList tasks={tasks} onUpdateStatus={updateTaskStatus} />
+                <TaskList tasks={filteredTasks} onUpdateStatus={updateTaskStatus} />
             </main>
 
             <div className="wireframe-note">

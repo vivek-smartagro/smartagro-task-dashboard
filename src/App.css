@@ -305,3 +305,8 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.btn-primary {
+    background-color: #007bff !important;
+    color: white !important;
+}

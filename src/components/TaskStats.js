@@ -11,11 +11,12 @@ import React from 'react';
 
 const TaskStats = ({ tasks }) => {
     // TODO: Implementation needed
-    const todo = 5;
-    const inProgress = 3;
-    const done = 8;
-    const progress = 60; // Example static value from mockup
-
+    
+    const todo = tasks.filter(task => task.status === 'To Do').length;
+    const inProgress = tasks.filter(task => task.status === 'In Progress').length;
+    const done = tasks.filter(task => task.status === 'Done').length;
+    const total = tasks.length;
+    const progress = total > 0 ? (done / total * 100) : 0;
     return (
         <header className="header-section">
             <h1 className="header-title">SmartAgro Task Dashboard</h1>
